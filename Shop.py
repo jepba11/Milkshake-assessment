@@ -2,6 +2,10 @@
 DISCOUNT = 0.75
 SPDISCOUNT = 0.9
 
+#define lists
+ItemsForSale = ["Jeans","T-Shirts","Shoes","Socks","Skirts"]
+SalePrice = []
+
 #define functions
 
 #welcome msg
