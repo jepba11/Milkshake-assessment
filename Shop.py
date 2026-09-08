@@ -1,6 +1,6 @@
 #define constants
-DISCOUNT = 0.75
-SPDISCOUNT = 0.9
+DISCOUNT = 0.75 #default sale discount
+SPDISCOUNT = 0.9 #special discount for 3+ items or purchases of over $100
 
 #define lists
 ItemsForSale = ["Jeans","T-Shirts","Shoes","Socks","Skirts"]
