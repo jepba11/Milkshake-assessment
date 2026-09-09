@@ -18,7 +18,7 @@ def welcomeMessage():
     print("\n\n\n\nWelcome to this Factory Outlet! We currently have a sale of 25% off all stocked items!\n"
           "If you purchase 3 or more items, or if your total purchase is over $100,\n"
           "you will receive an additional 10% off your total purchase."
-          "\nPlease note that during this sale we have a limit of 10 items per type of item per customer. "
+          "\n\nPlease note that during this sale we have a limit of 10 items per type of item per customer. "
           "\nThank you for your understanding") #small intro msg split across multiple lines for readability
     
     input("\nPress Enter to continue...") #breaking up the text for user qol
@@ -58,6 +58,13 @@ def addToOrder(selectedItems):
             order.append(itemCode)
 
     return order
+
+
+def calculateCustomerSubtotal(order):
+    subtotal = 0
+    for itemCode in order:
+        subtotal += PriceAfterSale[itemCode - 1]
+    return subtotal
 
 
 def newCustomer():
@@ -127,6 +134,9 @@ def newCustomer():
 
     for itemName, count in itemCounts.items():
         print(f"- {count}x {itemName}")
+
+    subtotal = calculateCustomerSubtotal(Order)
+    print(f"\nSubtotal: ${subtotal:.2f}")
 
 
 #welcome msg
