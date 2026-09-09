@@ -19,7 +19,7 @@ def welcomeMessage():
           "If you purchase 3 or more items, or if your total purchase is over $100,\n"
           "you will receive an additional 10% off your total purchase.") #small intro msg split across multiple lines for readability
     
-    input("\n\nPress Enter to continue...") #breaking up the text for user qol
+    input("\nPress Enter to continue...") #breaking up the text for user qol
 
 def newCustomer():
 
@@ -40,11 +40,14 @@ def newCustomer():
          print(f"- {ItemsForSale[i]} -Item code: {i+1} - ${RetailPrice[i]:.2f} - Sale Price: ${PriceAfterSale[i]:.2f}") #lists all stocked items and their retail + discount price
     
      print("\n What would you like to buy today?")
-     itemTypes = input("Please enter the item code for the item(s) the customer would like to buy, sperated by a comma.\n"
-           "E.g. 1,2,3 for Jeans, T-Shirts, and Shoes: ").split(",") #splits input into a list of item codes, seperated by a comma
+     itemTypes = input("Please enter the item code for the item(s) the customer would like to buy, sperated by a comma. \n"
+                       "ENSURE THAT IT IS A VALID ITEM CODE FROM THE LIST ABOVE\n"
+                        "E.g. 1,2,3 for Jeans, T-Shirts, and Shoes: ").split(",") #splits input into a list of item codes, seperated by a comma
      print(itemTypes) #test list logic
+
      itemTypes = [item.strip() for item in itemTypes] #removes whitespace from each item in the list
      print(itemTypes) #test list logic
+
      if len(itemTypes) == 0:
          print("No items were selected. Please try again.")
          itemSelected = False
