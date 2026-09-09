@@ -21,6 +21,39 @@ def welcomeMessage():
     
     input("\nPress Enter to continue...") #breaking up the text for user qol
 
+def addToOrder(selectedItems):
+    order = []
+
+    for itemCode in selectedItems:
+        try:
+            itemCode = int(itemCode)
+        except ValueError:
+            print(f"Invalid item code '{itemCode}'. Skipping this item.")
+            continue
+
+        if itemCode < 1 or itemCode > len(ItemsForSale):
+            print(f"Item code {itemCode} is not valid. Please choose a valid code.")
+            continue
+
+        while True:
+            try:
+                quantity = int(input(f"How many {ItemsForSale[itemCode - 1]} would you like? ").strip())
+            except ValueError:
+                print("Please enter a valid whole number.")
+                continue
+
+            if quantity < 0:
+                print("Quantity cannot be negative. Please try again.")
+                continue
+
+            break
+
+        for _ in range(quantity):
+            order.append(itemCode)
+
+    return order
+
+
 def newCustomer():
 
     #per-customer lists
@@ -43,16 +76,46 @@ def newCustomer():
      itemTypes = input("Please enter the item code for the item(s) the customer would like to buy, sperated by a comma. \n"
                        "ENSURE THAT IT IS A VALID ITEM CODE FROM THE LIST ABOVE\n"
                         "E.g. 1,2,3 for Jeans, T-Shirts, and Shoes: ").split(",") #splits input into a list of item codes, seperated by a comma
-     print(itemTypes) #test list logic
 
-     itemTypes = [item.strip() for item in itemTypes] #removes whitespace from each item in the list
-     print(itemTypes) #test list logic
+     itemTypes = [item.strip() for item in itemTypes if item.strip() != ""] #removes whitespace from each item in the list
 
      if len(itemTypes) == 0:
          print("No items were selected. Please try again.")
          itemSelected = False
-     else:
-         itemSelected = True
+         continue
+
+     validItemCodes = []
+     invalidItemCodes = []
+
+     for item in itemTypes:
+         try:
+             code = int(item)
+         except ValueError:
+             invalidItemCodes.append(item)
+             continue
+
+         if 1 <= code <= len(ItemsForSale):
+             validItemCodes.append(code)
+         else:
+             invalidItemCodes.append(item)
+
+     if len(validItemCodes) == 0:
+         print("No valid item codes were selected. Please try again.")
+         itemSelected = False
+         continue
+
+     if len(invalidItemCodes) > 0:
+         print(f"The following item codes are invalid and will be ignored: {invalidItemCodes}")
+
+     Order = addToOrder(validItemCodes)
+     RetailCost = [RetailPrice[itemCode - 1] for itemCode in Order]
+     SaleCost = [PriceAfterSale[itemCode - 1] for itemCode in Order]
+     SpecialDiscount = [SPDISCOUNT for _ in Order]
+     itemSelected = True
+
+    print("\nCustomer order:")
+    for itemCode in Order:
+        print(f"- {ItemsForSale[itemCode - 1]}")
 
 
 #welcome msg
