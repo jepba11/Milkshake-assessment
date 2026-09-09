@@ -26,6 +26,8 @@ def newCustomer():
     print("Welcome to this Factory Outlet! We currently have a sale of 25% off all stocked items!\n"
           "If you purchase 3 or more items, or if your total purchase is over $100,\n"
           "you will receive an additional 10% off your total purchase.") #small intro msg split across multiple lines for readability
+    
+    input("\n\nPress Enter to continue...") #breaking up the text for user qol
 
     #print stocked items
     itemSelected = False
@@ -49,6 +51,7 @@ def newCustomer():
 
 #welcome msg
 print("Hello and welcome to the cash register program.")
+input("Press Enter to continue...") #the message above isnt even seen if this isnt here
 customerAtRegister = True
 
 #main loop
