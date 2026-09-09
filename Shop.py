@@ -46,6 +46,10 @@ def addToOrder(selectedItems):
                 print("Quantity cannot be negative. Please try again.")
                 continue
 
+            if quantity > 10:
+                print(f"You can only buy up to 10 of each item per customer. Please choose a quantity between 0 and 10.")
+                continue
+
             break
 
         for _ in range(quantity):
@@ -114,8 +118,13 @@ def newCustomer():
      itemSelected = True
 
     print("\nCustomer order:")
+    itemCounts = {}
     for itemCode in Order:
-        print(f"- {ItemsForSale[itemCode - 1]}")
+        itemName = ItemsForSale[itemCode - 1]
+        itemCounts[itemName] = itemCounts.get(itemName, 0) + 1
+
+    for itemName, count in itemCounts.items():
+        print(f"- {count}x {itemName}")
 
 
 #welcome msg
