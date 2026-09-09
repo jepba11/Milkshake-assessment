@@ -66,6 +66,10 @@ def calculateCustomerSubtotal(order):
         subtotal += PriceAfterSale[itemCode - 1]
     return subtotal
 
+def applySpecialDiscount(subtotal, order):
+    if len(order) >= 3 or subtotal > 100:
+        return subtotal * SPDISCOUNT
+    return subtotal
 
 def newCustomer():
 
@@ -137,6 +141,12 @@ def newCustomer():
 
     subtotal = calculateCustomerSubtotal(Order)
     print(f"\nSubtotal: ${subtotal:.2f}")
+
+    total = applySpecialDiscount(subtotal, Order)
+    if total < subtotal:
+        print(f"Special discount applied! New total: ${total:.2f}")
+    else:
+        print(f"Total: ${total:.2f}")
 
 
 #welcome msg
